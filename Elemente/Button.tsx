@@ -1,9 +1,26 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
 
-export const Button = (params: { text: string; action: () => void }) => {
+export type ButtonProps = {
+  title: string;
+  onPress: () => void;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+};
+
+export const Button = (params: ButtonProps) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={params.action}>
-      <Text style={styles.text}>{params.text}</Text>
+    <TouchableOpacity
+      style={[styles.container, params.style]}
+      onPress={params.onPress}
+    >
+      <Text style={[styles.text, params.textStyle]}>{params.title}</Text>
     </TouchableOpacity>
   );
 };

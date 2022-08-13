@@ -16,30 +16,46 @@ const styles = StyleSheet.create({
     height: windowWidth,
     display: "flex",
     flexWrap: "wrap",
+    padding: 9,
   },
   innerField: {
-    width: windowWidth / 3,
-    height: windowWidth / 3,
-    borderColor: "#000000",
+    width: "33.333%",
+    height: "33.333%",
+    borderColor: "#181e5d",
     borderWidth: 3,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#d5d5e7",
   },
   anleitung: {
     fontWeight: "normal",
     fontStyle: "normal",
     color: "#000000",
-    fontSize: 18,
+    fontSize: 22,
     fontFamily: "sans-serif",
+    margin: 5,
+    textAlign: "center",
   },
   fieldText: {
     fontWeight: "normal",
     fontStyle: "normal",
-    color: "#000000",
-    fontSize: 12,
+    color: "#181e5d",
+    fontSize: 40,
     fontFamily: "sans-serif",
+  },
+  button: {
+    margin: 10,
+    backgroundColor: "#d5d5e7",
+    borderColor: "#181e5d",
+    width: 180,
+    alignSelf: "center",
+  },
+  buttonText: {
+    color: "#181e5d",
+    fontWeight: "bold",
+    fontSize: 18,
+    textAlign: "center",
   },
 });
 
@@ -48,7 +64,7 @@ type Status = "" | "X" | "O";
 const startInstruction = "X begins. Choose a field to start the game.";
 const oInstruction = "O's turn. Choose a field.";
 const xInstruction = "X's turn. Choose a field.";
-const endInstruction = "The End.";
+const endInstruction = "The game is over. The Winner is ";
 const winConditions: number[][] = [
   [0, 3, 6],
   [1, 4, 7],
@@ -87,29 +103,31 @@ export const TicTacToe = () => {
     return [player, numberOfEmptyFields];
   };
 
+  const displayEnd = (newStatus: Status[]) => {
+    const [w] = getCurrentPlayer(newStatus);
+    const winner = w === "X" ? "O" : "X";
+    if (determineWinner(newStatus)) setInstruction(endInstruction + winner);
+  };
+
+  const determineWinner = (newStatus: Status[]): Status => {
+    const [p] = getCurrentPlayer(newStatus);
+    const player = p === "X" ? "O" : "X";
+    for (let i = 0; i < winConditions.length; i++) {
+      const condition = winConditions[i];
+      const isFullfilled = condition.every((fieldNumber) => {
+        return newStatus[fieldNumber] === player;
+      });
+      console.log("condition", i, isFullfilled);
+      if (isFullfilled) return player;
+    }
+    return "";
+  };
+
   const restart = () => {
     const newStatus = [...currentStatus];
     newStatus.fill("");
     setStatus(newStatus);
     setInstruction(startInstruction);
-  };
-
-  const displayEnd = (newStatus: Status[]) => {
-    if (determineWinner(newStatus)) setInstruction(endInstruction);
-  };
-
-  const determineWinner = (newStatus: Status[]): Status => {
-    const [p] = getCurrentPlayer(newStatus);
-    const player = p === 'X' ? 'O' : 'X'
-    for (let i = 0; i < winConditions.length; i++) {
-      const condition = winConditions[i];
-      const isFullfilled = condition.every((fieldNumber) => {
-        return newStatus[fieldNumber] === player;
-      })
-      console.log("condition", i, isFullfilled)
-      if (isFullfilled) return player;
-    }
-    return ""
   };
 
   return (
@@ -133,7 +151,12 @@ export const TicTacToe = () => {
         })}
       </View>
       <Text style={styles.anleitung}>{currentInstruction}</Text>
-      <Button text={"Restart Game"} action={restart}></Button>
+      <Button
+        style={styles.button}
+        textStyle={styles.buttonText}
+        title={"Restart Game"}
+        onPress={restart}
+      ></Button>
     </>
   );
 };

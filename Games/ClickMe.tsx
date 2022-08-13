@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {StyleSheet, Text, View} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Button } from "../Elemente/Button";
 import { StatusBar } from "expo-status-bar";
 
@@ -14,8 +14,7 @@ const generalPlacement = (random: boolean) => {
   }).initialPosition;
 };
 
-const maxClicks = 10;
-
+const maxClicks = 9;
 
 export const ClickMe = () => {
   const [currentPlacement, setCurrentPlacement] = useState<
@@ -42,27 +41,65 @@ export const ClickMe = () => {
     setCurrentPlacement(generalPlacement(false));
   };
 
-  //x === 3 ? 'Hallo' : 'Falsch'
-
   return (
-    <View
-      style={
-        currentClick > maxClicks ? generalPlacement(false) : currentPlacement
-      }
-    >
-      {currentClick <= maxClicks ? (
-        <Button
-          text={currentClick ? "Nummer " + currentClick : "Klicke zum Starten"}
-          action={moveButton}
-        />
-      ) : (
-        <>
-          <Text>Super!</Text>
-          <Text>Du hast {startTime / 1000} Sekunden gebraucht.</Text>
-          <Button text={"Refresh"} action={refresh} />
-        </>
-      )}
-      <StatusBar style="auto" />
+    <View style={styles.container}>
+      <View
+        style={
+          currentClick > maxClicks ? generalPlacement(false) : currentPlacement
+        }
+      >
+        {currentClick <= maxClicks ? (
+          <Button
+            style={styles.button}
+            textStyle={styles.buttonText}
+            title={
+              currentClick ? "Click nr. " + currentClick : "Click here to start"
+            }
+            onPress={moveButton}
+          />
+        ) : (
+          <>
+            <Text style={styles.textStyle}>Fantastic!</Text>
+            <Text style={styles.textStyle}>
+              Your time is {startTime / 1000} seconds.
+            </Text>
+            <Button
+              style={styles.button}
+              textStyle={styles.buttonText}
+              title={"Refresh"}
+              onPress={refresh}
+            />
+          </>
+        )}
+        <StatusBar style="auto" />
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    margin: 10,
+    backgroundColor: "#d5d5e7",
+    borderColor: "#181e5d",
+    width: 180,
+    alignSelf: "center",
+  },
+  buttonText: {
+    color: "#181e5d",
+    fontWeight: "bold",
+    fontSize: 18,
+    textAlign: "center",
+  },
+  container: {
+    flex: 1,
+    padding: 15,
+    width: "100%",
+    backgroundColor: "#e2e2e5",
+  },
+  textStyle: {
+    color: "#181e5d",
+    fontSize: 15,
+    textAlign: "center",
+  },
+});
