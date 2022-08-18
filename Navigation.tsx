@@ -4,12 +4,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen } from "./Screens/HomeScreen";
 import { TicTacToeScreen } from "./Screens/TicTacToeScreen";
 import { ClickMeScreen } from "./Screens/ClickMeScreen";
-import {View} from "react-native";
+import {ConnectFourScreen} from "./Screens/ConnectFourScreen";
 
 export type RootStackParamList = {
   HomeScreen: undefined;
   TicTacToeScreen: undefined;
   ClickMeScreen: undefined;
+  ConnectFourScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -32,6 +33,11 @@ export const Navigation = () => {
           name="ClickMeScreen"
           component={ClickMeScreen}
           options={{ title: "Click Me" }}
+        />
+        <Stack.Screen
+            name="ConnectFourScreen"
+            component={ConnectFourScreen}
+            options={{ title: "Connect Four" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

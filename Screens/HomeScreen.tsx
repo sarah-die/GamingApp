@@ -41,8 +41,8 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           ></Image>
         </View>
         <Button
-          title="Play another Game"
-          onPress={() => navigation.navigate("ClickMeScreen")}
+          title="Play Connect Four"
+          onPress={() => navigation.navigate("ConnectFourScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
         />

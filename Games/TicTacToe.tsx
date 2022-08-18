@@ -8,57 +8,6 @@ import {
 import { useState } from "react";
 import { Button } from "../Elemente/Button";
 
-const windowWidth = Dimensions.get("window").width;
-
-const styles = StyleSheet.create({
-  outerField: {
-    width: windowWidth,
-    height: windowWidth,
-    display: "flex",
-    flexWrap: "wrap",
-    padding: 9,
-  },
-  innerField: {
-    width: "33.333%",
-    height: "33.333%",
-    borderColor: "#181e5d",
-    borderWidth: 3,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d5d5e7",
-  },
-  anleitung: {
-    fontWeight: "normal",
-    fontStyle: "normal",
-    color: "#000000",
-    fontSize: 22,
-    fontFamily: "sans-serif",
-    margin: 5,
-    textAlign: "center",
-  },
-  fieldText: {
-    fontWeight: "normal",
-    fontStyle: "normal",
-    color: "#181e5d",
-    fontSize: 40,
-    fontFamily: "sans-serif",
-  },
-  button: {
-    margin: 10,
-    backgroundColor: "#d5d5e7",
-    borderColor: "#181e5d",
-    width: 180,
-    alignSelf: "center",
-  },
-  buttonText: {
-    color: "#181e5d",
-    fontWeight: "bold",
-    fontSize: 18,
-    textAlign: "center",
-  },
-});
-
 type Status = "" | "X" | "O";
 
 const startInstruction = "X begins. Choose a field to start the game.";
@@ -160,3 +109,54 @@ export const TicTacToe = () => {
     </>
   );
 };
+
+const windowWidth = Dimensions.get("window").width;
+
+const styles = StyleSheet.create({
+  outerField: {
+    width: windowWidth,
+    height: windowWidth,
+    display: "flex",
+    flexWrap: "wrap",
+    padding: 9,
+  },
+  innerField: {
+    width: "33.333%",
+    height: "33.333%",
+    borderColor: "#181e5d",
+    borderWidth: 3,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#d5d5e7",
+  },
+  anleitung: {
+    fontWeight: "normal",
+    fontStyle: "normal",
+    color: "#000000",
+    fontSize: 22,
+    fontFamily: "sans-serif",
+    margin: 5,
+    textAlign: "center",
+  },
+  fieldText: {
+    fontWeight: "normal",
+    fontStyle: "normal",
+    color: "#181e5d",
+    fontSize: 40,
+    fontFamily: "sans-serif",
+  },
+  button: {
+    margin: 10,
+    backgroundColor: "#d5d5e7",
+    borderColor: "#181e5d",
+    width: 180,
+    alignSelf: "center",
+  },
+  buttonText: {
+    color: "#181e5d",
+    fontWeight: "bold",
+    fontSize: 18,
+    textAlign: "center",
+  },
+});
