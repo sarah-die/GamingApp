@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Button } from "../Elemente/Button";
-import { ConnectFour } from "./ConnectFour";
+import { ConnectFour } from "./ConnectFour/ConnectFour";
 
 export const ConnectFourColorPicker = () => {
   const startGame = () => {

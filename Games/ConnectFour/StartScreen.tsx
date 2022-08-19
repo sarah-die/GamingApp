@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { TriangleColorPicker } from "react-native-color-picker";
 import { Button } from "../../Elemente/Button";
 import { Token } from "../Token";
-import { ColorPickerStatus, Status } from "../ConnectFour";
+import { ColorPickerStatus, Status } from "./ConnectFour";
 import { styles } from "./Styles";
 
 const pickColor = () => {};

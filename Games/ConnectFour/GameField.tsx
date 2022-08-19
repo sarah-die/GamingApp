@@ -1,12 +1,14 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { Button } from "../../Elemente/Button";
-import {styles} from "./Styles";
-import {Status} from "../ConnectFour";
-
+import { styles } from "./Styles";
+import { Status } from "./ConnectFour";
+import { useConnectFourContext } from "./ConnectFourContext";
 
 const placeToken = () => {};
 
 export const GameField = (props: { setStatusX: (status: Status) => void }) => {
+  const ctx = useConnectFourContext();
+  ctx.setColorB(ctx.colorA)
   return (
     <>
       <View style={styles.outerField}>
