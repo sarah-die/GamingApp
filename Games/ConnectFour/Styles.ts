@@ -3,27 +3,31 @@ import { Dimensions, StyleSheet } from "react-native";
 const windowWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
-  outerField: {
+  outerGamefield: {
     width: windowWidth,
     height: windowWidth - (1 / 7) * windowWidth,
     display: "flex",
-    flexWrap: "wrap",
     padding: 9,
+    backgroundColor: "#e2e2e5",
+    flexDirection: "row",
   },
-  innerField: {
+  columnTouchable: {
     width: "14.2857%", // (1/7) * windowWidth
-    height: "14.2857%",
+    height: "100%",
+    display: "flex",
+    flexDirection: 'column'
+  },
+  innerGamefield: {
+    width: "100%", // (1/7) * windowWidth
+    height: "16.333%",
     borderColor: "#181e5d",
-    borderWidth: 3,
+    borderWidth: 0.5,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#d5d5e7",
   },
-  column: {
-    width: "14.2857%", // (1/7) * windowWidth
-    height: windowWidth - (1 / 7) * windowWidth,
-  },
+
   colorPickerOuter: {
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -37,15 +41,16 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
   },
   generalButton: {
-    margin: 30,
+    margin: 15,
+    padding: 12,
     backgroundColor: "#d5d5e7",
     borderColor: "#181e5d",
-    width: 180,
+    // width: 180,
+
     alignSelf: "center",
   },
   buttonText: {
     color: "#181e5d",
-
     fontSize: 22,
     textAlign: "center",
   },

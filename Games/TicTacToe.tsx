@@ -81,14 +81,14 @@ export const TicTacToe = () => {
 
   return (
     <>
-      <View style={styles.outerField}>
+      <View style={styles.outerGamefield}>
         {currentStatus.map((field, index) => {
           const thisRefresh = () => {
             refreshField(index);
           };
           return (
             <TouchableOpacity
-              style={styles.innerField}
+              style={styles.innerGamefield}
               // disabled={!!field}
               // onPress={() => {refreshField(index)}}
               onPress={thisRefresh}
@@ -113,14 +113,14 @@ export const TicTacToe = () => {
 const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
-  outerField: {
+  outerGamefield: {
     width: windowWidth,
     height: windowWidth,
     display: "flex",
     flexWrap: "wrap",
     padding: 9,
   },
-  innerField: {
+  innerGamefield: {
     width: "33.333%",
     height: "33.333%",
     borderColor: "#181e5d",

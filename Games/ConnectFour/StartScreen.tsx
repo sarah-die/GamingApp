@@ -1,18 +1,12 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import { TriangleColorPicker } from "react-native-color-picker";
+import { fromHsv, TriangleColorPicker } from "react-native-color-picker";
 import { Button } from "../../Elemente/Button";
 import { Token } from "../Token";
-import { ColorPickerStatus, Status } from "./ConnectFour";
 import { styles } from "./Styles";
+import { useConnectFourContext } from "./ConnectFourContext";
 
-const pickColor = () => {};
-
-
-export const StartScreen = (props: {
-  setStatusX: (status: Status) => void;
-  setColorPickerX: (colorPickerStatus: ColorPickerStatus) => void;
-  colorPickerStatusX: ColorPickerStatus;
-}) => {
+export const StartScreen = () => {
+  const ctx = useConnectFourContext();
   return (
     <View style={styles.container}>
       <Text style={styles.textStyle}>
@@ -20,7 +14,7 @@ export const StartScreen = (props: {
       </Text>
 
       <View style={styles.colorPickerOuter}>
-        {props.colorPickerStatusX === "on" ? (
+        {["onA", "onB"].includes(ctx.colorPickerStatus) ? (
           <View
             style={{
               flex: 1,
@@ -32,31 +26,38 @@ export const StartScreen = (props: {
           >
             <TriangleColorPicker
               oldColor="purple"
-              onColorSelected={(color) => alert(`Color selected: ${color}`)}
+              color={ctx.colorPickerStatus === "onA" ? ctx.colorA : ctx.colorB}
+              onColorChange={(color) => {
+                const fn =
+                  ctx.colorPickerStatus === "onA"
+                    ? ctx.setColorA
+                    : ctx.setColorB;
+                fn(fromHsv(color));
+              }}
               style={{ flex: 1 }}
             />
             <Button
               title={"Choose Color"}
-              onPress={pickColor}
+              onPress={() => ctx.setColorPickerStatus("off")}
               style={styles.generalButton}
-              textStyle={styles.buttonText}
+              textStyle={{ fontSize: 15 }}
             />
           </View>
         ) : (
           <>
             <TouchableOpacity
               style={styles.colorPickerInner}
-              onPress={() => props.setColorPickerX("on")}
+              onPress={() => ctx.setColorPickerStatus("onA")}
             >
-              <Token color={"black"} size={50} />
-              <Text style={styles.textStyle}>Player 1</Text>
+              <Token color={ctx.colorA} size={50} />
+              <Text style={styles.textStyle}>Player A</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.colorPickerInner}
-              onPress={() => props.setColorPickerX("on")}
+              onPress={() => ctx.setColorPickerStatus("onB")}
             >
-              <Token color={"white"} size={50} />
-              <Text style={styles.textStyle}>Player 2</Text>
+              <Token color={ctx.colorB} size={50} />
+              <Text style={styles.textStyle}>Player B</Text>
             </TouchableOpacity>
           </>
         )}
@@ -66,7 +67,7 @@ export const StartScreen = (props: {
       </Text>
       <Button
         title={"Start Game"}
-        onPress={() => props.setStatusX("play")}
+        onPress={() => ctx.setStatus("play")}
         style={styles.generalButton}
         textStyle={styles.buttonText}
       ></Button>

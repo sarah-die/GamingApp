@@ -1,28 +1,143 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { Button } from "../../Elemente/Button";
 import { styles } from "./Styles";
-import { Status } from "./ConnectFour";
 import { useConnectFourContext } from "./ConnectFourContext";
+import { useMemo, useState } from "react";
+import { Token } from "../Token";
 
-const placeToken = () => {};
+const startInstruction =
+  "Player A begins. Choose a column to place your first token.";
+const colorAInstruction = "Player X turn. Choose a column to place your token.";
+const colorBInstruction =
+  "Player X turn. Choose a column to place your  token.";
+const endInstruction = "The game is over. The Winner is ";
 
-export const GameField = (props: { setStatusX: (status: Status) => void }) => {
+const touchArea = new Array(7).fill("");
+
+type FieldStatus = "" | "A" | "B";
+type TouchStatus = "true" | "false";
+type PlayerStatus = "A" | "B";
+
+const getFieldIndex = (colIndex: number, rowIndex: number) =>
+  colIndex * 6 + rowIndex;
+
+export const GameField = () => {
   const ctx = useConnectFourContext();
-  ctx.setColorB(ctx.colorA)
+
+  const [currentFieldStatus, setFieldStatus] = useState<FieldStatus[]>(
+    new Array(42).fill("")
+  );
+
+  const currentPlayer = useMemo(() => {
+    const emptyFields = currentFieldStatus.filter((el) => el === "").length;
+    // if (emptyFields % 2 === 0) {
+    //     return 'A'
+    // } else {
+    //     return 'B'
+    // }
+    return emptyFields % 2 ? "B" : "A";
+  }, [currentFieldStatus]);
+
+  const currentInstruction = useMemo(() => {
+    const emptyFields = currentFieldStatus.filter((el) => el === "").length;
+    if (emptyFields === 42) {
+      return startInstruction;
+    } else if (emptyFields % 2 === 0) {
+      return colorAInstruction;
+    } else {
+      return colorBInstruction;
+    }
+  }, [currentFieldStatus]);
+
+  const placeToken = (colIndex: number) => {
+    // Range der Felder: 1 + colIndex * 6 bis 6 + colIndex * 6
+
+    // while (true)
+    const newFieldStatus = currentFieldStatus.slice();
+
+    let a = 5;
+    while (a >= 0) {
+      let field = a + colIndex * 6;
+
+      if (newFieldStatus[field] === "") {
+        if (currentPlayer === "A") {
+          newFieldStatus[field] = "A";
+          // <Token color={ctx.colorA} size={20} />
+        } else {
+          newFieldStatus[field] = "B";
+          // <Token color={ctx.colorB} size={20} />
+        }
+        break;
+      } else {
+        a--;
+      }
+    }
+
+    setFieldStatus(newFieldStatus);
+
+    // let i = 0;
+    // while (i < 6) {
+    //   let field = i + colIndex * 6;
+    //
+    //   if (newFieldStatus[field] === "") {
+    //     i++;
+    //   } else {
+    //     if (currentPlayer === "A") {
+    //       newFieldStatus[i - 1 + colIndex * 6] = "A";
+    //       // <Token color={ctx.colorA} size={20} />
+    //     } else {
+    //       newFieldStatus[i - 1 + colIndex * 6] = "B";
+    //       // <Token color={ctx.colorB} size={20} />
+    //     }
+    //   }
+    // }
+
+    // let i = 0;
+    // while (i < 6) {
+    //   let field = i + colIndex * 6;
+    //
+    //   if (currentFieldStatus[field] === "") {
+    //     i++;
+    //   }
+    // }
+
+    alert("touch");
+  };
+
+  console.log(currentFieldStatus);
   return (
     <>
-      <View style={styles.outerField}>
-        <View style={styles.innerField}></View>
-        <TouchableOpacity
-          onPress={placeToken}
-          style={styles.column}
-        ></TouchableOpacity>
+      <View style={styles.outerGamefield}>
+        {touchArea.map((_, colIndex) => {
+          return (
+            <TouchableOpacity
+              onPress={() => placeToken(colIndex)}
+              style={styles.columnTouchable}
+              key={colIndex}
+            >
+              {new Array(6).fill("").map((field, rowIndex) => {
+                const i = getFieldIndex(colIndex, rowIndex);
+                const el = currentFieldStatus[i];
+                return (
+                  <View style={styles.innerGamefield} key={rowIndex}>
+                    {!!el && (
+                      <Token
+                        color={el === "A" ? ctx.colorA : ctx.colorB}
+                        size={20}
+                      />
+                    )}
+                  </View>
+                );
+              })}
+            </TouchableOpacity>
+          );
+        })}
       </View>
       <View style={styles.container}>
-        <Text style={styles.textStyle}>Hier erscheinen die Anweisungen.</Text>
+        <Text style={styles.textStyle}>{currentInstruction}</Text>
         <Button
           title={"Restart"}
-          onPress={() => props.setStatusX("pickColor")}
+          onPress={() => ctx.setStatus("pickColor")}
           style={[styles.generalButton]}
           textStyle={[styles.buttonText, { fontWeight: "bold" }]}
         ></Button>
