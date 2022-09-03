@@ -11,24 +11,29 @@ type contextType = {
   setStatus: (s: Status) => void;
   colorPickerStatus: ColorPickerStatus;
   setColorPickerStatus: (s: ColorPickerStatus) => void;
+  currentGameStatus: GameStatus;
+  setGameStatus: (g: GameStatus) => void;
 };
 
 // neuer Context mit dem Typ und Initialwerten; hier irrelevant
 const ConnectFourContext = createContext<contextType>({
   colorA: "",
-  colorB: "",
   setColorA: () => {},
+  colorB: "",
   setColorB: () => {},
   status: "pickColor",
   setStatus: () => {},
   colorPickerStatus: "off",
   setColorPickerStatus: () => {},
+  currentGameStatus: "active",
+  setGameStatus: () => {},
 });
 
 const initialColor1 = "black";
 const initialColor2 = "white";
 export type Status = "pickColor" | "play";
 export type ColorPickerStatus = "onA" | "onB" | "off";
+export type GameStatus = "active" | "over";
 
 export const ConnectFourProvider = (props: { children: React.ReactNode }) => {
   const [colorA, setColorA] = useState<string>(initialColor1);
@@ -36,6 +41,8 @@ export const ConnectFourProvider = (props: { children: React.ReactNode }) => {
   const [status, setStatus] = useState<Status>("pickColor");
   const [colorPickerStatus, setColorPickerStatus] =
     useState<ColorPickerStatus>("off");
+  //Todo wenn Gewinner gefunden, dann soll kein Anklicken der Felder mehr möglich sein
+  const [currentGameStatus, setGameStatus] = useState<GameStatus>("active");
 
   return (
     <ConnectFourContext.Provider
@@ -48,6 +55,8 @@ export const ConnectFourProvider = (props: { children: React.ReactNode }) => {
         setStatus,
         colorPickerStatus,
         setColorPickerStatus,
+        currentGameStatus,
+        setGameStatus,
       }}
     >
       {props.children}

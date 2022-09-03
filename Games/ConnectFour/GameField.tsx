@@ -5,18 +5,10 @@ import { useConnectFourContext } from "./ConnectFourContext";
 import { useMemo, useState } from "react";
 import { Token } from "../Token";
 
-const startInstruction =
-  "Player A begins. Choose a column to place your first token.";
-const colorAInstruction = "Player X turn. Choose a column to place your token.";
-const colorBInstruction =
-  "Player X turn. Choose a column to place your  token.";
-const endInstruction = "The game is over. The Winner is ";
-
 const touchArea = new Array(7).fill("");
 
-type FieldStatus = "" | "A" | "B";
-type TouchStatus = "true" | "false";
-type PlayerStatus = "A" | "B";
+export type FieldStatus = "" | "A" | "B";
+
 
 const getFieldIndex = (colIndex: number, rowIndex: number) =>
   colIndex * 6 + rowIndex;
@@ -39,20 +31,25 @@ export const GameField = () => {
   }, [currentFieldStatus]);
 
   const currentInstruction = useMemo(() => {
+    const startInstruction =
+      "Player A begins. Choose a column to place your first token.";
+    const playerInstruction =
+      "Player " + currentPlayer + "turn. Choose a column to place your token.";
+    const endInstruction = "The game is over. The Winner is ";
+
     const emptyFields = currentFieldStatus.filter((el) => el === "").length;
     if (emptyFields === 42) {
       return startInstruction;
     } else if (emptyFields % 2 === 0) {
-      return colorAInstruction;
+      return playerInstruction;
     } else {
-      return colorBInstruction;
+      return playerInstruction;
     }
   }, [currentFieldStatus]);
 
   const placeToken = (colIndex: number) => {
     // Range der Felder: 1 + colIndex * 6 bis 6 + colIndex * 6
 
-    // while (true)
     const newFieldStatus = currentFieldStatus.slice();
 
     let a = 5;
@@ -75,33 +72,7 @@ export const GameField = () => {
 
     setFieldStatus(newFieldStatus);
 
-    // let i = 0;
-    // while (i < 6) {
-    //   let field = i + colIndex * 6;
-    //
-    //   if (newFieldStatus[field] === "") {
-    //     i++;
-    //   } else {
-    //     if (currentPlayer === "A") {
-    //       newFieldStatus[i - 1 + colIndex * 6] = "A";
-    //       // <Token color={ctx.colorA} size={20} />
-    //     } else {
-    //       newFieldStatus[i - 1 + colIndex * 6] = "B";
-    //       // <Token color={ctx.colorB} size={20} />
-    //     }
-    //   }
-    // }
-
-    // let i = 0;
-    // while (i < 6) {
-    //   let field = i + colIndex * 6;
-    //
-    //   if (currentFieldStatus[field] === "") {
-    //     i++;
-    //   }
-    // }
-
-    alert("touch");
+    // alert("touch");
   };
 
   console.log(currentFieldStatus);

@@ -66,7 +66,7 @@ export const TicTacToe = () => {
       const isFullfilled = condition.every((fieldNumber) => {
         return newStatus[fieldNumber] === player;
       });
-      console.log("condition", i, isFullfilled);
+      // console.log("condition", i, isFullfilled);
       if (isFullfilled) return player;
     }
     return "";

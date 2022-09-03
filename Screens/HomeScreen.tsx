@@ -37,7 +37,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <View style={styles.imageContainer}>
           <Image
             style={styles.images}
-            source={require("./images/test.png")}
+            source={require("./images/connect-4.jpg")}
           ></Image>
         </View>
         <Button
