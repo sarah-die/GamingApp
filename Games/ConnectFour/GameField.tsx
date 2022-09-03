@@ -4,6 +4,7 @@ import { styles } from "./Styles";
 import { useConnectFourContext } from "./ConnectFourContext";
 import { useMemo, useState } from "react";
 import { Token } from "../Token";
+import {checkForWinner} from "./DetermineWinner";
 
 const touchArea = new Array(7).fill("");
 
@@ -52,9 +53,9 @@ export const GameField = () => {
 
     const newFieldStatus = currentFieldStatus.slice();
 
-    let a = 5;
-    while (a >= 0) {
-      let field = a + colIndex * 6;
+    let rowIndex = 5;
+    while (rowIndex >= 0) {
+      let field = rowIndex + colIndex * 6;
 
       if (newFieldStatus[field] === "") {
         if (currentPlayer === "A") {
@@ -66,16 +67,22 @@ export const GameField = () => {
         }
         break;
       } else {
-        a--;
+        rowIndex--;
       }
+
     }
 
     setFieldStatus(newFieldStatus);
 
+    if (checkForWinner(newFieldStatus, colIndex, rowIndex)) {
+      ctx.setGameStatus("over");
+      alert("win");
+    }
+
     // alert("touch");
   };
 
-  console.log(currentFieldStatus);
+  // console.log(currentFieldStatus);
   return (
     <>
       <View style={styles.outerGamefield}>

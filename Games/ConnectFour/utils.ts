@@ -1,5 +1,5 @@
 
-const determineBorders = (rowIndex: number, colIndex: number) => {
+export const determineBorders = (rowIndex: number, colIndex: number) => {
   const top = rowIndex;
   const right = 6 - colIndex;
   const bottom = 5 - rowIndex;

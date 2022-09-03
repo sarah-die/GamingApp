@@ -1,48 +1,62 @@
 import { useConnectFourContext } from "./ConnectFourContext";
 import { FieldStatus } from "./GameField";
+import {determineBorders} from "./utils";
 
 type Borders = ReturnType<typeof determineBorders>;
 
-export const determineWinner = (
+// export const determineWinner = (
+//   colIndex: number,
+//   rowIndex: number,
+//   currentField: number,
+//   currentFieldStatus: FieldStatus[]
+// ) => {
+//   const ctx = useConnectFourContext();
+//   // Todo Gewinnbedingungen um gesetztes Feld rum prüfen
+//
+//   const borders = determineBorders(rowIndex, colIndex);
+//
+//   if (checkForWinner(currentFieldStatus, currentField, borders)) {
+//     ctx.setGameStatus("over");
+//   }
+// };
+
+export const checkForWinner = (
+  currentFieldStatus: FieldStatus[],
   colIndex: number,
   rowIndex: number,
-  currentField: number,
-  currentFieldStatus: FieldStatus[]
 ) => {
-  const ctx = useConnectFourContext();
-  // Todo Gewinnbedingungen um gesetztes Feld rum prüfen
-
+  const currentField = colIndex * 6 + rowIndex;
+  const c = [currentFieldStatus, currentField] as const;
   const borders = determineBorders(rowIndex, colIndex);
-
-  // if () {
-  //
-  //   ctx.setGameStatus("over")
-  // } else {
-  //
-  //   ctx.setGameStatus("active")
-  // }
-
-  return;
+  return (
+    checkByDirection(...c, borders.top, borders.bottom, 1) ||
+    checkByDirection(...c, borders.leftBottom, borders.rightTop, 5) ||
+    checkByDirection(...c, borders.left, borders.right, 6) ||
+    checkByDirection(...c, borders.leftTop, borders.rightBottom, 7)
+  );
 };
 
-const checkTopBottom = (
-  borders: Borders,
+const checkByDirection = (
   currentFieldStatus: FieldStatus[],
-  currentField: number
+  currentField: number,
+  border1: number,
+  border2: number,
+  delta: 1 | 5 | 6 | 7
 ) => {
-  const ctx = useConnectFourContext();
   let check = 1;
 
   let i = 1;
-  while (i <= borders.top) {
+  while (i <= border1) {
     if (
-      currentFieldStatus[currentField] === currentFieldStatus[currentField - i]
+      currentFieldStatus[currentField] ===
+      currentFieldStatus[currentField - i * delta]
     ) {
       i++;
       check++;
+      console.log("if1", check, i, currentField)
       if (check === 4) {
-        ctx.setGameStatus("over");
-        break;
+        console.log("check4", border1, border2, delta)
+        return true;
       }
     } else {
       break;
@@ -50,18 +64,20 @@ const checkTopBottom = (
   }
 
   let a = 1;
-  while (a <= borders.bottom) {
+  while (a <= border2) {
     if (
-      currentFieldStatus[currentField] === currentFieldStatus[currentField + a]
+      currentFieldStatus[currentField] ===
+      currentFieldStatus[currentField + a * delta]
     ) {
       a++;
       check++;
       if (check === 4) {
-        ctx.setGameStatus("over");
-        break;
+        console.log("check4.2", border1, border2, delta)
+        return true;
       }
     } else {
       break;
     }
   }
+  return false;
 };
