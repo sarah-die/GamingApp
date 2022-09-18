@@ -1,29 +1,13 @@
 import { useConnectFourContext } from "./ConnectFourContext";
 import { FieldStatus } from "./GameField";
-import {determineBorders} from "./utils";
+import { determineBorders } from "./utils";
 
 type Borders = ReturnType<typeof determineBorders>;
-
-// export const determineWinner = (
-//   colIndex: number,
-//   rowIndex: number,
-//   currentField: number,
-//   currentFieldStatus: FieldStatus[]
-// ) => {
-//   const ctx = useConnectFourContext();
-//   // Todo Gewinnbedingungen um gesetztes Feld rum prüfen
-//
-//   const borders = determineBorders(rowIndex, colIndex);
-//
-//   if (checkForWinner(currentFieldStatus, currentField, borders)) {
-//     ctx.setGameStatus("over");
-//   }
-// };
 
 export const checkForWinner = (
   currentFieldStatus: FieldStatus[],
   colIndex: number,
-  rowIndex: number,
+  rowIndex: number
 ) => {
   const currentField = colIndex * 6 + rowIndex;
   const c = [currentFieldStatus, currentField] as const;
@@ -53,9 +37,7 @@ const checkByDirection = (
     ) {
       i++;
       check++;
-      console.log("if1", check, i, currentField)
       if (check === 4) {
-        console.log("check4", border1, border2, delta)
         return true;
       }
     } else {
@@ -72,7 +54,6 @@ const checkByDirection = (
       a++;
       check++;
       if (check === 4) {
-        console.log("check4.2", border1, border2, delta)
         return true;
       }
     } else {

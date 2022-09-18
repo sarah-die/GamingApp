@@ -41,7 +41,7 @@ export const ConnectFourProvider = (props: { children: React.ReactNode }) => {
   const [status, setStatus] = useState<Status>("pickColor");
   const [colorPickerStatus, setColorPickerStatus] =
     useState<ColorPickerStatus>("off");
-  //Todo wenn Gewinner gefunden, dann soll kein Anklicken der Felder mehr möglich sein
+  // ToDo wenn Gewinner gefunden, dann soll kein Anklicken der Felder mehr möglich sein
   const [currentGameStatus, setGameStatus] = useState<GameStatus>("active");
 
   return (

@@ -4,12 +4,11 @@ import { styles } from "./Styles";
 import { useConnectFourContext } from "./ConnectFourContext";
 import { useMemo, useState } from "react";
 import { Token } from "../Token";
-import {checkForWinner} from "./DetermineWinner";
+import { checkForWinner } from "./DetermineWinner";
 
 const touchArea = new Array(7).fill("");
 
 export type FieldStatus = "" | "A" | "B";
-
 
 const getFieldIndex = (colIndex: number, rowIndex: number) =>
   colIndex * 6 + rowIndex;
@@ -35,8 +34,23 @@ export const GameField = () => {
     const startInstruction =
       "Player A begins. Choose a column to place your first token.";
     const playerInstruction =
-      "Player " + currentPlayer + "turn. Choose a column to place your token.";
-    const endInstruction = "The game is over. The Winner is ";
+      "Player " +
+      currentPlayer +
+      "'s turn. Choose a column to place your token.";
+    const endInstruction = "The game is over. Click the button to start a new game.";
+
+    if (ctx.currentGameStatus === "active") {
+      const emptyFields = currentFieldStatus.filter((el) => el === "").length;
+      if (emptyFields === 42) {
+        return startInstruction;
+      } else if (emptyFields % 2 === 0) {
+        return playerInstruction;
+      } else {
+        return playerInstruction;
+      }
+    } else {
+      return endInstruction;
+    }
 
     const emptyFields = currentFieldStatus.filter((el) => el === "").length;
     if (emptyFields === 42) {
@@ -60,29 +74,29 @@ export const GameField = () => {
       if (newFieldStatus[field] === "") {
         if (currentPlayer === "A") {
           newFieldStatus[field] = "A";
-          // <Token color={ctx.colorA} size={20} />
         } else {
           newFieldStatus[field] = "B";
-          // <Token color={ctx.colorB} size={20} />
         }
         break;
       } else {
         rowIndex--;
       }
-
     }
 
     setFieldStatus(newFieldStatus);
 
     if (checkForWinner(newFieldStatus, colIndex, rowIndex)) {
       ctx.setGameStatus("over");
-      alert("win");
+      alert("The Game is over. Congratulations to Player " + currentPlayer + "!");
     }
-
-    // alert("touch");
   };
 
-  // console.log(currentFieldStatus);
+  const restart = () => {
+    ctx.setGameStatus("active"),
+    ctx.setColorPickerStatus("off")
+    ctx.setStatus("pickColor")
+  };
+
   return (
     <>
       <View style={styles.outerGamefield}>
@@ -92,6 +106,7 @@ export const GameField = () => {
               onPress={() => placeToken(colIndex)}
               style={styles.columnTouchable}
               key={colIndex}
+              disabled={ctx.currentGameStatus === "over"}
             >
               {new Array(6).fill("").map((field, rowIndex) => {
                 const i = getFieldIndex(colIndex, rowIndex);
@@ -115,7 +130,7 @@ export const GameField = () => {
         <Text style={styles.textStyle}>{currentInstruction}</Text>
         <Button
           title={"Restart"}
-          onPress={() => ctx.setStatus("pickColor")}
+          onPress={() => restart()}
           style={[styles.generalButton]}
           textStyle={[styles.buttonText, { fontWeight: "bold" }]}
         ></Button>
