@@ -46,6 +46,18 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           style={styles.button}
           textStyle={styles.buttonText}
         />
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.images}
+            source={require("./images/conways.png")}
+          ></Image>
+        </View>
+        <Button
+          title={"Play Conways Game of Life"}
+          onPress={() => navigation.navigate("ConwaysScreen")}
+          style={styles.button}
+          textStyle={styles.buttonText}
+        ></Button>
       </View>
     </ScrollView>
   );
@@ -69,6 +81,7 @@ const styles = StyleSheet.create({
     color: "#181e5d",
     fontWeight: "bold",
     fontSize: 18,
+    textAlign: "center",
   },
   images: {
     width: "100%",

@@ -12,6 +12,11 @@ export const checkForWinner = (
   const currentField = colIndex * 6 + rowIndex;
   const c = [currentFieldStatus, currentField] as const;
   const borders = determineBorders(rowIndex, colIndex);
+
+  if (currentFieldStatus[currentField] === "") {
+    return false;
+  }
+
   return (
     checkByDirection(...c, borders.top, borders.bottom, 1) ||
     checkByDirection(...c, borders.leftBottom, borders.rightTop, 5) ||
@@ -27,6 +32,7 @@ const checkByDirection = (
   border2: number,
   delta: 1 | 5 | 6 | 7
 ) => {
+
   let check = 1;
 
   let i = 1;
