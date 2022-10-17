@@ -1,5 +1,5 @@
-import { Dimensions, StyleSheet } from "react-native";
-import {cellNumberHeight, cellNumberWidth, cellSize, windowHeight, windowWidth} from "./dimensions";
+import { StyleSheet } from "react-native";
+import { cellSize } from "./dimensions";
 
 // const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
@@ -8,26 +8,31 @@ import {cellNumberHeight, cellNumberWidth, cellSize, windowHeight, windowWidth} 
 
 export const styles = StyleSheet.create({
   fullScreen: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     padding: 8,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
+  dimensionHelper: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   gameField: {
-    width: '100%',
-    height: '100%',
     borderWidth: 3,
-    borderColor: '#000000',
+    borderColor: "#000000",
     display: "flex",
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   cellField: {
     width: cellSize,
     height: cellSize,
     borderWidth: 1,
-    borderColor: '#000000',
+    borderColor: "#000000",
   },
 });
