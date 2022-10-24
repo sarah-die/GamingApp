@@ -1,6 +1,8 @@
 import { Layout } from "./useMeasure";
+import { useConwaysContext } from "./ConwaysContext";
 
-export const cellSize: number = 30;
+const ctx = useConwaysContext();
+export const cellSize: number = ctx.cellSize;
 export const border: number = 2;
 
 export const getFieldDimensions = (dim: Layout | null) => {

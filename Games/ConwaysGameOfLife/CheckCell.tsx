@@ -1,5 +1,6 @@
 // Prüfe, wie ein Zelle sich zum nächsten Refresh verändert
 import { Status } from "./ConwaysGameFieldScreen";
+import { useMeasure } from "./useMeasure";
 
 export const checkCell = (
   currentFieldStatus: Status[],
@@ -18,6 +19,8 @@ export const checkCell = (
     } else if (numbAlive === 2 || numbAlive === 3) {
       return "alive";
     } else if (numbAlive > 3) {
+      return "dead";
+    } else {
       return "dead";
     }
   } else {
@@ -50,7 +53,6 @@ const checkNeighbours = (
     if (currentFieldStatus[cellNumber + neighbours[i]] === "alive") {
       countAlive++;
     }
-    i++;
   }
 
   return countAlive;
