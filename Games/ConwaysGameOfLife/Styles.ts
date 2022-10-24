@@ -1,10 +1,5 @@
 import { StyleSheet } from "react-native";
-import { cellSize } from "./dimensions";
-
-// const windowWidth = Dimensions.get("window").width;
-// const windowHeight = Dimensions.get("window").height;
-// const cellNumberWidth = Math.floor(windowWidth / cellSize);
-// const cellNumberHeight = Math.floor(windowHeight / cellSize);
+import { border, cellSize } from "./fieldDimensions";
 
 export const styles = StyleSheet.create({
   fullScreen: {
@@ -23,7 +18,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   gameField: {
-    borderWidth: 3,
+    borderWidth: border,
     borderColor: "#000000",
     display: "flex",
     flexDirection: "row",
@@ -32,7 +27,7 @@ export const styles = StyleSheet.create({
   cellField: {
     width: cellSize,
     height: cellSize,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: "#000000",
   },
 });

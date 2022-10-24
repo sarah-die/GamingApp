@@ -14,7 +14,6 @@ export const useMeasure = () => {
   let relevant = false;
   const onLayout = useCallback((e: unknown) => {
     const event = e as Event;
-    console.log(event.nativeEvent.layout);
 
     if (relevant) setDim(event.nativeEvent.layout);
     relevant = !relevant

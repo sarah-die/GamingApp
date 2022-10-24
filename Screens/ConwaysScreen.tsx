@@ -1,9 +1,9 @@
 import { RootStackParamList } from "../Navigation";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { ConwaysGameField } from "../Games/ConwaysGameOfLife/ConwaysGameField";
+import { ConwaysGameFieldScreen } from "../Games/ConwaysGameOfLife/ConwaysGameFieldScreen";
 
 type ConwaysProps = NativeStackScreenProps<RootStackParamList, "ConwaysScreen">;
 
 export const ConwaysScreen = ({ navigation }: ConwaysProps) => {
-  return <ConwaysGameField />;
+  return <ConwaysGameFieldScreen />;
 };

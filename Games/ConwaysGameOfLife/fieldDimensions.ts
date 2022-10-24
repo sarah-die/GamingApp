@@ -1,8 +1,7 @@
-import { Dimensions } from "react-native";
 import { Layout } from "./useMeasure";
 
 export const cellSize: number = 30;
-export const border: number = 3;
+export const border: number = 2;
 
 export const getFieldDimensions = (dim: Layout | null) => {
   if (!dim) return null;
@@ -21,3 +20,5 @@ export const getFieldDimensions = (dim: Layout | null) => {
     targetHeight: cellNumberHeight * cellSize + border * 2,
   };
 };
+
+export type FieldDimensions = ReturnType<typeof getFieldDimensions>

@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { styles } from "./Styles";
-import { getFieldDimensions } from "./dimensions";
+import { getFieldDimensions } from "./fieldDimensions";
 import { useMeasure } from "./useMeasure";
+import { checkCell } from "./CheckCell";
 
 export type Status = "dead" | "alive";
-export type GameStatus = "placement" | "inGame";
+export type GameStatus = "dimensions" | "placement" | "inGame";
 
-export const ConwaysGameField = () => {
+export const ConwaysGameFieldScreen = () => {
   const m = useMeasure();
   const fieldDimensions = useMemo(() => getFieldDimensions(m.dim), [m.dim]);
 
@@ -21,8 +22,8 @@ export const ConwaysGameField = () => {
     currentFieldStatus[cellNumber] = "alive";
   };
 
-  const checkRules = () => {
-    // Aufruf checkCell
+  const checkRules = (cellNumber: number) => {
+    checkCell(currentFieldStatus, cellNumber);
   };
 
   return (
