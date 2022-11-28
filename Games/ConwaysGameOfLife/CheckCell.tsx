@@ -38,6 +38,7 @@ const checkNeighbours = (
   cellNumberHeight: number
 ) => {
   let countAlive: number = 0;
+  // TODO: Implement border overflow
   const neighbours: number[] = [
     -1,
     cellNumberHeight - 1,

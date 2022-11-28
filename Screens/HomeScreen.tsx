@@ -58,6 +58,18 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           style={styles.button}
           textStyle={styles.buttonText}
         ></Button>
+        <Button
+          title="Play The Tapping Duell"
+          onPress={() => navigation.navigate("TappingDuellScreen")}
+          style={styles.button}
+          textStyle={styles.buttonText}
+        />
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.images}
+            source={require("./images/Gesture-02.png")}
+          ></Image>
+        </View>
       </View>
     </ScrollView>
   );

@@ -6,6 +6,7 @@ import { TicTacToeScreen } from "./Screens/TicTacToeScreen";
 import { ClickMeScreen } from "./Screens/ClickMeScreen";
 import { ConnectFourScreen } from "./Screens/ConnectFourScreen";
 import { ConwaysScreen } from "./Screens/ConwaysScreen";
+import { TappingDuellScreen } from "./Screens/TappingDuellScreen";
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   ClickMeScreen: undefined;
   ConnectFourScreen: undefined;
   ConwaysScreen: undefined;
+  TappingDuellScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -41,10 +43,15 @@ export const Navigation = () => {
           component={ConnectFourScreen}
           options={{ title: "Connect Four" }}
         />
+        {/*<Stack.Screen*/}
+        {/*  name="ConwaysScreen"*/}
+        {/*  component={ConwaysScreen}*/}
+        {/*  options={{ title: "Conways Game of Life" }}*/}
+        {/*/>*/}
         <Stack.Screen
-          name="ConwaysScreen"
-          component={ConwaysScreen}
-          options={{ title: "Conways Game of Life" }}
+          name="TappingDuellScreen"
+          component={TappingDuellScreen}
+          options={{ title: "The Tapping Duell" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
