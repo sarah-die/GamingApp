@@ -26,7 +26,7 @@ export const Navigation = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{ title: "Let's play some games" }}
+          options={{ title: "Games for players of two" }}
         />
         <Stack.Screen
           name="TicTacToeScreen"
@@ -34,14 +34,14 @@ export const Navigation = () => {
           options={{ title: "Tic Tac Toe" }}
         />
         <Stack.Screen
-          name="ClickMeScreen"
-          component={ClickMeScreen}
-          options={{ title: "Click Me" }}
-        />
-        <Stack.Screen
           name="ConnectFourScreen"
           component={ConnectFourScreen}
           options={{ title: "Connect Four" }}
+        />
+        <Stack.Screen
+          name="ClickMeScreen"
+          component={ClickMeScreen}
+          options={{ title: "Click Me" }}
         />
         {/*<Stack.Screen*/}
         {/*  name="ConwaysScreen"*/}
