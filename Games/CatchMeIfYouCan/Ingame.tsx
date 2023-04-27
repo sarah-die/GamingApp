@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button } from "../../Elemente/Button";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./Styles";
+import { useCatchMeContext } from "./CatchMeContext";
 
 const generalPlacement = (random: boolean) => {
   return StyleSheet.create({
@@ -15,9 +16,8 @@ const generalPlacement = (random: boolean) => {
   }).initialPosition;
 };
 
-const maxClicks = 9;
-
 export const Ingame = () => {
+  const ctx = useCatchMeContext();
   const [currentPlacement, setCurrentPlacement] = useState<
     ReturnType<typeof generalPlacement>
   >(generalPlacement(false));
@@ -32,7 +32,7 @@ export const Ingame = () => {
     setCurrentClick(currentClick + 1);
     if (thisClick === 1) {
       setStartTime(Date.now());
-    } else if (thisClick === maxClicks) {
+    } else if (thisClick === ctx.numberOfClicks) {
       setStartTime(Date.now() - startTime);
     }
   };
@@ -46,10 +46,10 @@ export const Ingame = () => {
     <View style={styles.container}>
       <View
         style={
-          currentClick > maxClicks ? generalPlacement(false) : currentPlacement
+          currentClick > ctx.numberOfClicks ? generalPlacement(false) : currentPlacement
         }
       >
-        {currentClick <= maxClicks ? (
+        {currentClick <= ctx.numberOfClicks ? (
           <Button
             style={styles.button}
             textStyle={styles.buttonText}
