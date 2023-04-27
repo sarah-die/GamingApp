@@ -6,6 +6,10 @@ import { useMemo, useState } from "react";
 import { Token } from "../../Elemente/Token";
 import { checkForWinner } from "./DetermineWinner";
 
+/** The GameFieldScreen consists of the playing fields, the game instructions and a restart button.
+ * The playing field is divided into columns. Clicking on them sets the player's token.
+ * After each click there is an evaluation whether there is a winner. **/
+
 const touchArea = new Array(7).fill("");
 
 export type FieldStatus = "" | "A" | "B";
@@ -13,7 +17,7 @@ export type FieldStatus = "" | "A" | "B";
 const getFieldIndex = (colIndex: number, rowIndex: number) =>
   colIndex * 6 + rowIndex;
 
-export const GameField = () => {
+export const GameFieldScreen = () => {
   const ctx = useConnectFourContext();
 
   const [currentFieldStatus, setFieldStatus] = useState<FieldStatus[]>(
@@ -79,11 +83,15 @@ export const GameField = () => {
 
     if (newFieldStatus.every((el) => el !== "")) {
       ctx.setGameStatus("over");
-      Alert.alert("Game Over", "The Game is over. You both played strong. The game is a draw.");
+      Alert.alert(
+        "Game Over",
+        "The Game is over. You both played strong. The game is a draw."
+      );
     }
     if (checkForWinner(newFieldStatus, colIndex, rowIndex)) {
       ctx.setGameStatus("over");
-      Alert.alert("Game Over",
+      Alert.alert(
+        "Game Over",
         "The Game is over. Congratulations to Player " + currentPlayer + "!"
       );
     }

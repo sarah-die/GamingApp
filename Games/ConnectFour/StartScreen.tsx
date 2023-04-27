@@ -5,6 +5,8 @@ import { Token } from "../../Elemente/Token";
 import { styles } from "./Styles";
 import { useConnectFourContext } from "./ConnectFourContext";
 
+/** The startscreen allows the two players to choose the color of their token before they start the game. **/
+
 export const StartScreen = () => {
   const ctx = useConnectFourContext();
   return (
@@ -63,7 +65,8 @@ export const StartScreen = () => {
         )}
       </View>
       <Text style={styles.textStyle}>
-        If you're ready. Click the button to start the game.
+        If you're ready. Click the button to start the game. Just follow the
+        instructions given to you during the game.
       </Text>
       <Button
         title={"Start Game"}

@@ -1,8 +1,7 @@
-import { useConnectFourContext } from "./ConnectFourContext";
-import { FieldStatus } from "./GameField";
+import { FieldStatus } from "./GameFieldScreen";
 import { determineBorders } from "./utils";
 
-type Borders = ReturnType<typeof determineBorders>;
+/** Validate the currentFieldStatus for a winner. **/
 
 export const checkForWinner = (
   currentFieldStatus: FieldStatus[],

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
-import { ColorPicker } from "react-native-color-picker";
+
+/** Make status and values globally available. **/
 
 //global verfügbare Eigenschaften
 type contextType = {

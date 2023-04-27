@@ -1,3 +1,5 @@
+/** Determine if next to the current tile is a border to support the evaluation if there is a winner. **/
+
 export const determineBorders = (rowIndex: number, colIndex: number) => {
   const top = rowIndex;
   const right = 6 - colIndex;
@@ -20,8 +22,6 @@ export const determineBorders = (rowIndex: number, colIndex: number) => {
     leftBottom,
   };
 };
-
-type Borders = ReturnType<typeof determineBorders>;
 
 const determineDiagonalBorders = (border1: number, border2: number) =>
   Math.min(border1, border2);
