@@ -26,7 +26,7 @@ export const Navigation = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{ title: "Games for players of two" }}
+          options={{ title: "Games for two players" }}
         />
         <Stack.Screen
           name="TicTacToeScreen"
