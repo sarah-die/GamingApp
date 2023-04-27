@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   },
   textStyle: {
     color: "#181e5d",
-    fontSize: 18,
+    fontSize: 22,
     textAlign: "center",
   },
 });
