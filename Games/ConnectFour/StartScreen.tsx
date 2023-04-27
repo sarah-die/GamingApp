@@ -52,14 +52,14 @@ export const StartScreen = () => {
               onPress={() => ctx.setColorPickerStatus("onA")}
             >
               <Token color={ctx.colorA} size={50} />
-              <Text style={styles.textStyle}>Player A</Text>
+              <Text style={{ ...styles.textStyle, textAlign: "center" }}>Player A</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.colorPickerInner}
               onPress={() => ctx.setColorPickerStatus("onB")}
             >
               <Token color={ctx.colorB} size={50} />
-              <Text style={styles.textStyle}>Player B</Text>
+              <Text style={{ ...styles.textStyle, textAlign: "center" }}>Player B</Text>
             </TouchableOpacity>
           </>
         )}
