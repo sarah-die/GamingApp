@@ -25,24 +25,24 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <View style={styles.imageContainer}>
           <Image
             style={styles.images}
-            source={require("./images/clickMe.jpg")}
-          ></Image>
-        </View>
-        <Button
-          title="Play Click Me"
-          onPress={() => navigation.navigate("ClickMeScreen")}
-          style={styles.button}
-          textStyle={styles.buttonText}
-        />
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.images}
             source={require("./images/connect-4.jpg")}
           ></Image>
         </View>
         <Button
           title="Play Connect Four"
           onPress={() => navigation.navigate("ConnectFourScreen")}
+          style={styles.button}
+          textStyle={styles.buttonText}
+        />
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.images}
+            source={require("./images/clickMe.jpg")}
+          ></Image>
+        </View>
+        <Button
+          title="Play Click Me"
+          onPress={() => navigation.navigate("ClickMeScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
         />
