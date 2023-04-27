@@ -42,7 +42,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
         </View>
         <Button
           title="Catch Me If You Can"
-          onPress={() => navigation.navigate("ClickMeScreen")}
+          onPress={() => navigation.navigate("CatchMeIfYouCanScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
         />
