@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, StyleSheet, View } from "react-native";
 import { Button } from "../../Elemente/Button";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./Styles";
@@ -9,8 +9,8 @@ const generalPlacement = (random: boolean) => {
   return StyleSheet.create({
     initialPosition: {
       position: "absolute",
-      top: random ? Math.random() * 90 + 10 + "%" : "50%",
-      left: random ? Math.random() * 90 + 10 + "%" : "50%",
+      top: random ? Math.random() * 70 + 10 + "%" : "30%",
+      left: random ? Math.random() * 70 + 10 + "%" : "30%",
       transform: [{ translateX: -50 }, { translateY: -50 }],
     },
   }).initialPosition;
@@ -18,6 +18,7 @@ const generalPlacement = (random: boolean) => {
 
 export const Ingame = () => {
   const ctx = useCatchMeContext();
+
   const [currentPlacement, setCurrentPlacement] = useState<
     ReturnType<typeof generalPlacement>
   >(generalPlacement(false));
@@ -37,6 +38,15 @@ export const Ingame = () => {
     }
   };
 
+  useEffect(() => {
+    if (currentClick - 1 === ctx.numberOfClicks) {
+      Alert.alert(
+        "Finished!",
+        "Fantastic! It took you " + startTime / 1000 + " seconds."
+      );
+    }
+  }, [currentClick]);
+
   const refresh = () => {
     setCurrentClick(0);
     setCurrentPlacement(generalPlacement(false));
@@ -46,31 +56,25 @@ export const Ingame = () => {
     <View style={styles.container}>
       <View
         style={
-          currentClick > ctx.numberOfClicks ? generalPlacement(false) : currentPlacement
+          currentClick > ctx.numberOfClicks
+            ? generalPlacement(false)
+            : currentPlacement
         }
       >
         {currentClick <= ctx.numberOfClicks ? (
           <Button
-            style={styles.button}
+            style={{ ...styles.button, width: 120, height: 120, borderRadius: 20 }}
             textStyle={styles.buttonText}
-            title={
-              currentClick ? "Click nr. " + currentClick : "Click here to start"
-            }
+            title={currentClick ? "Nr. " + currentClick : "Click here to start"}
             onPress={moveButton}
           />
         ) : (
-          <>
-            <Text style={styles.textStyle}>Fantastic!</Text>
-            <Text style={styles.textStyle}>
-              Your time is {startTime / 1000} seconds.
-            </Text>
-            <Button
-              style={styles.button}
-              textStyle={styles.buttonText}
-              title={"Refresh"}
-              onPress={refresh}
-            />
-          </>
+          <Button
+            style={styles.button}
+            textStyle={styles.buttonText}
+            title={"Restart"}
+            onPress={refresh}
+          />
         )}
         <StatusBar style="auto" />
       </View>
