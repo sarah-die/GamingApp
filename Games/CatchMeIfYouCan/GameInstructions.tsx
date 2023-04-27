@@ -7,10 +7,10 @@ export const GameInstructions = () => {
   const ctx = useCatchMeContext();
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.textStyle}>
         Welcome to "Catch Me If You Can". In this game you try to tap the target
-        field as fast as you possible. The field jumps to a new position after each click.
+        field as fast as possible. The field jumps to a new position after each click.
       </Text>
       <Text style={styles.textStyle}>
         This game is made for one player. But you can try to break each other's
@@ -23,7 +23,7 @@ export const GameInstructions = () => {
         title={"Let's Start"}
         onPress={() => ctx.setGameStatus("ingame")}
         style={styles.button}
-        textStyle={{ fontSize: 15 }}
+        textStyle={styles.buttonText}
       />
     </View>
   );

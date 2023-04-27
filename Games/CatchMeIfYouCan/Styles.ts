@@ -10,18 +10,19 @@ export const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#181e5d",
-    fontSize: 22,
+    fontSize: 20,
     textAlign: "center",
+    fontWeight: "bold",
   },
   container: {
     flex: 1,
-    padding: 15,
+    padding: 20,
     width: "100%",
     backgroundColor: "#e2e2e5",
   },
   textStyle: {
     color: "#181e5d",
     fontSize: 22,
-    textAlign: "center",
+    textAlign: "justify",
   },
 });
