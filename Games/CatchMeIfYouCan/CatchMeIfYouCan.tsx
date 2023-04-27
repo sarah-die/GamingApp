@@ -2,6 +2,7 @@ import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "../../Elemente/Button";
 import { StatusBar } from "expo-status-bar";
+import { styles } from "./Styles";
 
 const generalPlacement = (random: boolean) => {
   return StyleSheet.create({
@@ -16,7 +17,7 @@ const generalPlacement = (random: boolean) => {
 
 const maxClicks = 9;
 
-export const ClickMe = () => {
+export const CatchMeIfYouCan = () => {
   const [currentPlacement, setCurrentPlacement] = useState<
     ReturnType<typeof generalPlacement>
   >(generalPlacement(false));
@@ -76,30 +77,3 @@ export const ClickMe = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    margin: 10,
-    backgroundColor: "#d5d5e7",
-    borderColor: "#181e5d",
-    width: 180,
-    alignSelf: "center",
-  },
-  buttonText: {
-    color: "#181e5d",
-    fontWeight: "bold",
-    fontSize: 18,
-    textAlign: "center",
-  },
-  container: {
-    flex: 1,
-    padding: 15,
-    width: "100%",
-    backgroundColor: "#e2e2e5",
-  },
-  textStyle: {
-    color: "#181e5d",
-    fontSize: 15,
-    textAlign: "center",
-  },
-});
