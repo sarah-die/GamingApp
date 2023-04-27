@@ -10,7 +10,7 @@ export const GameInstructions = () => {
     <View>
       <Text style={styles.textStyle}>
         Welcome to "Catch Me If You Can". In this game you try to tap the target
-        field, which jumps to a new point after each click, as fast as you can.
+        field as fast as you possible. The field jumps to a new position after each click.
       </Text>
       <Text style={styles.textStyle}>
         This game is made for one player. But you can try to break each other's
