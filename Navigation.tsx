@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen } from "./Screens/HomeScreen";
 import { TicTacToeScreen } from "./Screens/TicTacToeScreen";
-import { ClickMeScreen } from "./Screens/ClickMeScreen";
+import { CatchMeIfYouCanScreen } from "./Screens/CatchMeIfYouCanScreen";
 import { ConnectFourScreen } from "./Screens/ConnectFourScreen";
 import { ConwaysScreen } from "./Screens/ConwaysScreen";
 import { TappingDuellScreen } from "./Screens/TappingDuellScreen";
@@ -11,7 +11,7 @@ import { TappingDuellScreen } from "./Screens/TappingDuellScreen";
 export type RootStackParamList = {
   HomeScreen: undefined;
   TicTacToeScreen: undefined;
-  ClickMeScreen: undefined;
+  CatchMeIfYouCanScreen: undefined;
   ConnectFourScreen: undefined;
   ConwaysScreen: undefined;
   TappingDuellScreen: undefined;
@@ -39,9 +39,9 @@ export const Navigation = () => {
           options={{ title: "Connect Four" }}
         />
         <Stack.Screen
-          name="ClickMeScreen"
-          component={ClickMeScreen}
-          options={{ title: "Click Me" }}
+          name="CatchMeIfYouCanScreen"
+          component={CatchMeIfYouCanScreen}
+          options={{ title: "Catch Me If You Can" }}
         />
         {/*<Stack.Screen*/}
         {/*  name="ConwaysScreen"*/}

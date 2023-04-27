@@ -5,9 +5,9 @@ import { CatchMeIfYouCan } from "../Games/CatchMeIfYouCan/CatchMeIfYouCan";
 
 type ClickMeScreenProps = NativeStackScreenProps<
   RootStackParamList,
-  "ClickMeScreen"
+  "CatchMeIfYouCanScreen"
 >;
 
-export const ClickMeScreen = ({ navigation }: ClickMeScreenProps) => {
+export const CatchMeIfYouCanScreen = ({ navigation }: ClickMeScreenProps) => {
   return <CatchMeIfYouCan />;
 };
