@@ -17,7 +17,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           ></Image>
         </View>
         <Button
-          title="Play Tic Tac Toe"
+          title="Tic Tac Toe"
           onPress={() => navigation.navigate("TicTacToeScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
@@ -29,7 +29,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           ></Image>
         </View>
         <Button
-          title="Play Connect Four"
+          title="Connect Four"
           onPress={() => navigation.navigate("ConnectFourScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
@@ -41,7 +41,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           ></Image>
         </View>
         <Button
-          title="Play Click Me"
+          title="Catch Me If You Can"
           onPress={() => navigation.navigate("ClickMeScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
@@ -53,7 +53,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           ></Image>
         </View>
         <Button
-          title={"Play Conways Game of Life"}
+          title={"Conways Game of Life"}
           onPress={() => navigation.navigate("ConwaysScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
@@ -65,7 +65,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           ></Image>
         </View>
         <Button
-          title="Play The Tapping Duell"
+          title="The Tapping Duell"
           onPress={() => navigation.navigate("TappingDuellScreen")}
           style={styles.button}
           textStyle={styles.buttonText}
