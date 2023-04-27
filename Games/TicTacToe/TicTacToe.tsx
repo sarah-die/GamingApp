@@ -1,19 +1,16 @@
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
 import { Button } from "../../Elemente/Button";
+import { styles } from "./Styles";
 
-type Status = "" | "X" | "O";
+type FieldStatus = "" | "X" | "O";
+type GameStatus = "active" | "over";
 
 const startInstruction = "X begins. Choose a field to start the game.";
 const oInstruction = "O's turn. Choose a field.";
 const xInstruction = "X's turn. Choose a field.";
-const endInstruction = "The game is over. The Winner is ";
+const winnerInstruction = "The game is over. The Winner is ";
+const noWinnerInstruction = "The game is over. Both of you played brilliant. It's a draw."
 const winConditions: number[][] = [
   [0, 3, 6],
   [1, 4, 7],
@@ -26,72 +23,84 @@ const winConditions: number[][] = [
 ];
 
 export const TicTacToe = () => {
-  const [currentStatus, setStatus] = useState<Status[]>(new Array(9).fill(""));
+  const [gameStatus, setGameStatus] = useState<GameStatus>("active");
+  const [fieldStatus, setFieldStatus] = useState<FieldStatus[]>(
+    new Array(9).fill("")
+  );
   const [currentInstruction, setInstruction] =
     useState<string>(startInstruction);
 
   const refreshField = (index: number) => {
-    if (currentStatus[index] !== "") return;
-    // if (currentStatus[index]) return;
-    const newStatus = [...currentStatus];
-    const [player, numberOfEmptyFields] = getCurrentPlayer(newStatus);
-    newStatus[index] = player;
-    setStatus(newStatus);
+    if (fieldStatus[index] !== "") return;
+    // if (fieldStatus[index]) return;
+    const newFieldStatus = [...fieldStatus];
+    const [player, numberOfEmptyFields] = getCurrentPlayer(newFieldStatus);
+    newFieldStatus[index] = player;
+    setFieldStatus(newFieldStatus);
     const playersInstruction: string =
       numberOfEmptyFields % 2 ? oInstruction : xInstruction;
     setInstruction(playersInstruction);
-    // if (numberOfEmptyFields === 1) displayEnd();
-    displayEnd(newStatus);
+    checkForWinner(newFieldStatus);
   };
 
-  const getCurrentPlayer = (newStatus: Status[]): [Status, number] => {
+  const getCurrentPlayer = (
+    newStatus: FieldStatus[]
+  ): [FieldStatus, number] => {
     const numberOfEmptyFields = newStatus.filter((el) => {
       return el === "";
     }).length;
-    const player: Status = numberOfEmptyFields % 2 ? "X" : "O";
+    const player: FieldStatus = numberOfEmptyFields % 2 ? "X" : "O";
     return [player, numberOfEmptyFields];
   };
 
-  const displayEnd = (newStatus: Status[]) => {
-    const [w] = getCurrentPlayer(newStatus);
+  const checkForWinner = (newFieldStatus: FieldStatus[]) => {
+    if (newFieldStatus.every((el) => el !== "")) {
+      setGameStatus("over");
+      setInstruction(noWinnerInstruction);
+    }
+    const [w] = getCurrentPlayer(newFieldStatus);
     const winner = w === "X" ? "O" : "X";
-    if (determineWinner(newStatus)) setInstruction(endInstruction + winner);
+    if (determineWinner(newFieldStatus)) {
+      setGameStatus("over");
+      setInstruction(winnerInstruction + winner + ".");
+    }
   };
 
-  const determineWinner = (newStatus: Status[]): Status => {
-    const [p] = getCurrentPlayer(newStatus);
+  const determineWinner = (newFieldStatus: FieldStatus[]): FieldStatus => {
+    const [p] = getCurrentPlayer(newFieldStatus);
     const player = p === "X" ? "O" : "X";
     for (let i = 0; i < winConditions.length; i++) {
       const condition = winConditions[i];
       const isFullfilled = condition.every((fieldNumber) => {
-        return newStatus[fieldNumber] === player;
+        return newFieldStatus[fieldNumber] === player;
       });
-      // console.log("condition", i, isFullfilled);
-      if (isFullfilled) return player;
+      if (isFullfilled) {
+        setGameStatus("over");
+        return player;
+      }
     }
     return "";
   };
 
   const restart = () => {
-    const newStatus = [...currentStatus];
-    newStatus.fill("");
-    setStatus(newStatus);
+    const newFieldStatus = [...fieldStatus];
+    newFieldStatus.fill("");
+    setFieldStatus(newFieldStatus);
     setInstruction(startInstruction);
+    setGameStatus("active");
   };
 
   return (
     <>
       <View style={styles.outerGamefield}>
-        {currentStatus.map((field, index) => {
-          const thisRefresh = () => {
-            refreshField(index);
-          };
+        {fieldStatus.map((field, index) => {
           return (
             <TouchableOpacity
               style={styles.innerGamefield}
-              // disabled={!!field}
-              // onPress={() => {refreshField(index)}}
-              onPress={thisRefresh}
+              disabled={gameStatus === "over"}
+              onPress={() => {
+                refreshField(index);
+              }}
               key={index}
             >
               <Text style={styles.fieldText}>{field}</Text>
@@ -109,54 +118,3 @@ export const TicTacToe = () => {
     </>
   );
 };
-
-const windowWidth = Dimensions.get("window").width;
-
-const styles = StyleSheet.create({
-  outerGamefield: {
-    width: windowWidth,
-    height: windowWidth,
-    display: "flex",
-    flexWrap: "wrap",
-    padding: 9,
-  },
-  innerGamefield: {
-    width: "33.333%",
-    height: "33.333%",
-    borderColor: "#181e5d",
-    borderWidth: 3,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d5d5e7",
-  },
-  anleitung: {
-    fontWeight: "normal",
-    fontStyle: "normal",
-    color: "#000000",
-    fontSize: 22,
-    fontFamily: "sans-serif",
-    margin: 5,
-    textAlign: "center",
-  },
-  fieldText: {
-    fontWeight: "normal",
-    fontStyle: "normal",
-    color: "#181e5d",
-    fontSize: 40,
-    fontFamily: "sans-serif",
-  },
-  button: {
-    margin: 10,
-    backgroundColor: "#d5d5e7",
-    borderColor: "#181e5d",
-    width: 180,
-    alignSelf: "center",
-  },
-  buttonText: {
-    color: "#181e5d",
-    fontWeight: "bold",
-    fontSize: 18,
-    textAlign: "center",
-  },
-});
