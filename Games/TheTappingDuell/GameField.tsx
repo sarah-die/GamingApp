@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styles, windowHeight } from "./Styles";
-import { Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Button } from "../../Elemente/Button";
 
 export type GameStatus = "NewGame" | "InGame" | "GameEnd";
@@ -43,14 +43,16 @@ export const GameField = () => {
   return (
     <>
       {gameStatus === "NewGame" && (
-        <View style={styles.outerGamefield}>
-          <Text>
+        <View style={styles.container}>
+          <Text style={styles.textStyle}>
             Spiel für zwei Spieler: Klickt beide so schnell es geht euer Feld
             an. Dadurch vergrößert sich dieses, während das Feld der Gegners
             schrumpft. Der Spieler, dessen Feld zuerst den Bildschirm einnimmt
             hat gewonnen. Viel Spaß!
           </Text>
           <Button
+            style={styles.generalButton}
+            textStyle={styles.buttonText}
             title={"Press to Start"}
             onPress={() => setGameStatus("InGame")}
           ></Button>
