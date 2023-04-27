@@ -1,8 +1,12 @@
 import { GameInstructions } from "./GameInstructions";
 import { Ingame } from "./Ingame";
-import { useCatchMeContext } from "./CatchMeContext";
+import { CatchMeProvider, useCatchMeContext } from "./CatchMeContext";
 
-export const CatchMeIfYouCan = () => <GameScreens />;
+export const CatchMeIfYouCan = () => (
+  <CatchMeProvider>
+    <GameScreens />
+  </CatchMeProvider>
+);
 
 export const GameScreens = () => {
   const ctx = useCatchMeContext();
