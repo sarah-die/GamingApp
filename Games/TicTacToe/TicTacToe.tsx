@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 import { useState } from "react";
-import { Button } from "../Elemente/Button";
+import { Button } from "../../Elemente/Button";
 
 type Status = "" | "X" | "O";
 

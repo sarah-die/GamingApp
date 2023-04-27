@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Button } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../Navigation";
-import { TicTacToe } from "../Games/TicTacToe";
+import { TicTacToe } from "../Games/TicTacToe/TicTacToe";
 
 type TicTacToeScreenProps = NativeStackScreenProps<
   RootStackParamList,

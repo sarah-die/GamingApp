@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { fromHsv, TriangleColorPicker } from "react-native-color-picker";
 import { Button } from "../../Elemente/Button";
-import { Token } from "../Token";
+import { Token } from "../../Elemente/Token";
 import { styles } from "./Styles";
 import { useConnectFourContext } from "./ConnectFourContext";
 

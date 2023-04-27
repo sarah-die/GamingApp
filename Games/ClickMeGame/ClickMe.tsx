@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "../Elemente/Button";
+import { Button } from "../../Elemente/Button";
 import { StatusBar } from "expo-status-bar";
 
 const generalPlacement = (random: boolean) => {

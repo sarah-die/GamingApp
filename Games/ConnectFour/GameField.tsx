@@ -3,7 +3,7 @@ import { Button } from "../../Elemente/Button";
 import { styles } from "./Styles";
 import { useConnectFourContext } from "./ConnectFourContext";
 import { useMemo, useState } from "react";
-import { Token } from "../Token";
+import { Token } from "../../Elemente/Token";
 import { checkForWinner } from "./DetermineWinner";
 
 const touchArea = new Array(7).fill("");
@@ -92,7 +92,7 @@ export const GameField = () => {
   };
 
   const restart = () => {
-    ctx.setGameStatus("active"),
+    ctx.setGameStatus("active")
     ctx.setColorPickerStatus("off")
     ctx.setStatus("pickColor")
   };
