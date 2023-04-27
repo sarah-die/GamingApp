@@ -4,23 +4,26 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { Button } from "../../Elemente/Button";
 
 export type GameStatus = "NewGame" | "InGame" | "GameEnd";
-const diff: number = 10;
+const diff: number = 15;
 
 export const GameField = () => {
   const [heightA, setHeightA] = useState<number>(windowHeight / 2);
   const [heightB, setHeightB] = useState<number>(windowHeight / 2);
   const [gameStatus, setGameStatus] = useState<GameStatus>("NewGame");
+  const [winner, setWinner] = useState<string>("");
 
   const checkFieldSize = (
     sizeA: number,
     sizeB: number
   ): "A" | "B" | undefined => {
     if (sizeA <= 0) {
+      setWinner("blue");
       setGameStatus("GameEnd");
       setHeightA(windowHeight / 2);
       setHeightB(windowHeight / 2);
       return "B";
     } else if (sizeB <= 0) {
+      setWinner("purple");
       setGameStatus("GameEnd");
       setHeightA(windowHeight / 2);
       setHeightB(windowHeight / 2);
@@ -45,10 +48,14 @@ export const GameField = () => {
       {gameStatus === "NewGame" && (
         <View style={styles.container}>
           <Text style={styles.textStyle}>
-            Spiel für zwei Spieler: Klickt beide so schnell es geht euer Feld
-            an. Dadurch vergrößert sich dieses, während das Feld der Gegners
-            schrumpft. Der Spieler, dessen Feld zuerst den Bildschirm einnimmt
-            hat gewonnen. Viel Spaß!
+            Game for two players: Both click on your field as fast as possible.
+            Every click makes your field bigger, while the opponent's field
+            shrinks. The player whose field takes up the screen first is the
+            winner. Have fun!
+          </Text>
+          <Text style={{ ...styles.textStyle, fontSize: 15, paddingTop: 5 }}>
+            Psst: Make sure to only click on your color - especially if your field
+            shrinks.
           </Text>
           <Button
             style={styles.generalButton}
@@ -65,7 +72,7 @@ export const GameField = () => {
             style={{
               ...styles.playerTouchable,
               height: heightA,
-              backgroundColor: "#649253",
+              backgroundColor: "#655392",
             }}
             onPress={refreshField("A")}
           ></TouchableOpacity>
@@ -74,16 +81,18 @@ export const GameField = () => {
             style={{
               ...styles.playerTouchable,
               height: heightB,
-              backgroundColor: "#1ebcda",
+              backgroundColor: "#133972",
             }}
             onPress={refreshField("B")}
           ></TouchableOpacity>
         </View>
       )}
       {gameStatus === "GameEnd" && (
-        <View style={styles.outerGamefield}>
-          <Text>Congrats!</Text>
+        <View style={styles.container}>
+          <Text style={styles.textStyle}>Congrats to {winner} player!</Text>
           <Button
+            style={styles.generalButton}
+            textStyle={styles.buttonText}
             title={"Restart Game"}
             onPress={() => setGameStatus("NewGame")}
           ></Button>
