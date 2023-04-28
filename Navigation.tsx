@@ -43,11 +43,11 @@ export const Navigation = () => {
           component={CatchMeIfYouCanScreen}
           options={{ title: "Catch Me If You Can" }}
         />
-        {/*<Stack.Screen*/}
-        {/*  name="ConwaysScreen"*/}
-        {/*  component={ConwaysScreen}*/}
-        {/*  options={{ title: "Conways Game of Life" }}*/}
-        {/*/>*/}
+        <Stack.Screen
+          name="ConwaysScreen"
+          component={ConwaysScreen}
+          options={{ title: "Conways Game of Life" }}
+        />
         <Stack.Screen
           name="TappingDuellScreen"
           component={TappingDuellScreen}
