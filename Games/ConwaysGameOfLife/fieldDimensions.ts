@@ -1,12 +1,12 @@
-import { Layout } from "./useMeasure";
+import { useMeasure } from "./useMeasure";
 import { useConwaysContext } from "./ConwaysContext";
 
-const ctx = useConwaysContext();
-export const cellSize: number = ctx.cellSize;
 export const border: number = 2;
 
-export const getFieldDimensions = (dim: Layout | null) => {
-  if (!dim) return null;
+export const useFieldDimensions = () => {
+  const {dim, onLayout} = useMeasure();
+  const {cellSize} = useConwaysContext();
+  if (!dim) return {onLayout};
   const cellNumberWidth: number = Math.floor(
     (dim.width - border * 2) / cellSize
   );
@@ -14,6 +14,7 @@ export const getFieldDimensions = (dim: Layout | null) => {
     (dim.height - border * 2) / cellSize
   );
   return {
+    onLayout,
     cellSize,
     cellNumberWidth,
     cellNumberHeight,
@@ -23,4 +24,4 @@ export const getFieldDimensions = (dim: Layout | null) => {
   };
 };
 
-export type FieldDimensions = ReturnType<typeof getFieldDimensions>
+export type FieldDimensions = ReturnType<typeof useFieldDimensions>
