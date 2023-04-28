@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { border, cellSize } from "./fieldDimensions";
+import { border } from "./fieldDimensions";
 
 export const styles = StyleSheet.create({
   fullScreen: {
@@ -25,8 +25,6 @@ export const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   cellField: {
-    width: cellSize,
-    height: cellSize,
     borderWidth: 0.5,
     borderColor: "#000000",
   },
